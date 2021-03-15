@@ -1,6 +1,7 @@
 package linkextractor;
 
 import lombok.SneakyThrows;
+import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -8,8 +9,7 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class XMLParser {
 
@@ -37,5 +37,25 @@ public class XMLParser {
             links.add(node.getTextContent());
         }
         return links;
+    }
+
+    @SneakyThrows
+    public static Map<String, String> parseWithDate(File file, String tag1, String tag2) {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+
+        Document document = builder.parse(file);
+        document.getDocumentElement().normalize();
+        Map<String, String> map = new HashMap<>();
+
+        NodeList nListLink = document.getElementsByTagName(tag1);
+        NodeList nListDate = document.getElementsByTagName(tag2);
+
+        for (int temp = 1; temp < nListLink.getLength(); temp++) {
+            Node nodeLink = nListLink.item(temp);
+            Node nodeDate = nListDate.item(temp);
+            map.put(nodeLink.getTextContent(), nodeDate.getTextContent().substring(0,7));
+        }
+        return map;
     }
 }

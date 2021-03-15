@@ -32,7 +32,7 @@ public class Runner {
 
                 // here we add all links to a file links.txt
                 appendUsingFileOutputStream(linksPath, link + "\n");
-                if (link.contains("http://blog-picsart.tools/")) {
+                if (link.contains("picsart.tools") || link.contains("stage-wordpress")) {
                     // here we add all links which contain specific string to a file invalidLinks.txt
                     appendUsingFileOutputStream(invalidLinksPath, link + "\n" + url);
                     appendUsingFileOutputStream(invalidLinksPath, "====================================================");
