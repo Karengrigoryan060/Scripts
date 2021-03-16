@@ -22,23 +22,29 @@ public class Runner {
             allURLs.addAll(urlList);
         }
         System.out.println("Total: " + allURLs.size() + " links");
-
+        int i = 1;
         for (String url : allURLs) {
-            List<String> links = LinkExtractor.extractLinks(url);
-            for (String link : links) {
+            List<String> links;
+            String linksPath = "src/main/resources/extractedLinks/links.txt";
+            String invalidLinksPath = "src/main/resources/extractedLinks/invalidLinks.txt";
 
-                String linksPath = "src/main/resources/extractedLinks/links.txt";
-                String invalidLinksPath = "src/main/resources/extractedLinks/invalidLinks.txt";
-
-                // here we add all links to a file links.txt
-                appendUsingFileOutputStream(linksPath, link + "\n");
-                if (link.contains("picsart.tools") || link.contains("stage-wordpress")) {
-                    // here we add all links which contain specific string to a file invalidLinks.txt
-                    appendUsingFileOutputStream(invalidLinksPath, link + "\n" + url);
-                    appendUsingFileOutputStream(invalidLinksPath, "====================================================");
+            try {
+                links = LinkExtractor.extractLinks(url);
+                for (String link : links) {
+                    // here we add all links to a file links.txt
+                    appendUsingFileOutputStream(linksPath, link + "\n");
+                    if (link.contains("picsart.tools") || link.contains("stage-wordpress")) {
+                        // here we add all links which contain specific string to a file invalidLinks.txt
+                        appendUsingFileOutputStream(invalidLinksPath, link + "\n" + url);
+                        appendUsingFileOutputStream(invalidLinksPath, "====================================================");
+                    }
                 }
+                System.out.println(url + " is passed, Left: " + (allURLs.size() - i));
+                i++;
+            } catch (IOException e) {
+                appendUsingFileOutputStream(invalidLinksPath, url + " is invalid");
+                appendUsingFileOutputStream(invalidLinksPath, "====================================================");
             }
-            System.out.println(url + " is passed");
         }
 
     }
