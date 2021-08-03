@@ -35,9 +35,8 @@ public class Script extends Thread {
     }
 
     private static void check(HttpResponse<String> stringHttpResponse, long id) {
-//        String errorMessage = "Something went wrong with : " + id;
+        System.out.println("Response code for : "+ id +" is : "+ stringHttpResponse.getStatus());
         if (stringHttpResponse.getStatus() != 200) {
-//            System.out.println(errorMessage + "  status code :" + stringHttpResponse.getStatus());
             result.add(id);
         }
         Gson gson = new Gson();

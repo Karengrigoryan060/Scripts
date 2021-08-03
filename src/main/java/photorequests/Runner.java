@@ -8,7 +8,7 @@ public class Runner {
 
     public static final String REQUEST_URL = "https://api.picsart.com/photos/shutterstock/url?ids={ids}&action=post";
     public static final String TOKEN = "e361d76f-c4dd-470a-a0e6-a1660da3610a";
-    public static String EXCEL_FILE_PATH = "/Users/karengrigoryan/Downloads/ShutterstockSep.xlsx";
+    public static String EXCEL_FILE_PATH = "/Users/karengrigoryan/Downloads/jul.xlsx";
 
 
     public static void main(String[] args) throws InterruptedException {
@@ -17,9 +17,9 @@ public class Runner {
 
         int a = 0;
 
-        for (int i = 1; i < excelValue.size() / 10; i++) {
+        for (int i = 1; i < excelValue.size() ; i++) {
             Thread thread = null;
-            for (int j = 1; j < 10; j++) {
+//            for (int j = 1; j < 10; j++) {
                 try {
                     thread = new Script(excelValue.get(a));
                     thread.start();
@@ -27,7 +27,7 @@ public class Runner {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
+//            }
             assert thread != null;
             thread.join();
         }
