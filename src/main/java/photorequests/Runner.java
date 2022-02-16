@@ -8,7 +8,7 @@ public class Runner {
 
     public static final String REQUEST_URL = "https://api.picsart.com/photos/shutterstock/url?ids={ids}&action=post";
     public static final String TOKEN = "e361d76f-c4dd-470a-a0e6-a1660da3610a";
-    public static String EXCEL_FILE_PATH = "/Users/karengrigoryan/Downloads/jul.xlsx";
+    public static String EXCEL_FILE_PATH = "/Users/karengrigoryan/Downloads/decjan.xlsx";
 
 
     public static void main(String[] args) throws InterruptedException {
